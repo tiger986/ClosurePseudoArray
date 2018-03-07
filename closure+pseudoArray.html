@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title></title>
+	</head>
+	<body>
+		<div>
+			<p>0</p>
+			<p>1</p>
+			<p>2</p>
+			<p>3</p>
+			<p>4</p>
+			<p>5</p>
+			<p>6</p>
+			<p>7</p>
+			<p>8</p>
+			<p>9</p>
+		</div>
+	</body>
+</html>
+
+<script type="text/javascript">
+	
+	//要求:点击按钮(p标签)打印出对应的值
+	
+	var btns = document.getElementsByTagName("p");
+	
+	//点击按钮打印该按钮的下标1（此方法不能满足需求）
+	for(var i = 0; i <btns.length; i++){
+		btns[i].onclick = function(){
+			console.log(i); //  点击每个按钮打印出来的都是9，
+							//因为这里只是定义函数，点击按钮的时候才是调用，那个时候循环早已结束：i=9
+		}
+	}
+	
+	//能够满足需求的方法：
+	//(1)
+	for(var i = 0; i <btns.length; i++){
+		btns[i].index = i; //用按钮的属性把对应的i存起来
+		btns[i].onclick = function(){
+			console.log(this.index); //打印出来的是对应的属性值，也就是对应的i
+									//点击按钮调用函数时i=9，但我们打印的不是i，而是存起来的对应的index值
+		}
+	}
+	
+	//（2）
+	for(var i = 0; i <btns.length; i++){
+		(function(num){
+			btns[num].onclick = function(){				
+				console.log(num);
+			}
+		})(i) //函数自调用（调用的是外层的匿名函数），
+			  //循环一次就调用一次（每次调用都把i当参数传入变成num），所以打印出来是每次循环出来的i值
+	}
+	
+	//（3）
+	for(var i = 0; i < btns.length; i++){
+		btns[i].onclick = (function(num){
+			return function(){
+				console.log(num);
+			}
+		})(i) //原理同上，只是调用的函数不同
+	}
+	
+	//（4）
+	console.log(btns instanceof Array); //false (因为是伪数组)
+	
+	btns = Array.prototype.slice.call(btns); //将是伪数组转化为真正的数组
+	
+	console.log(btns instanceof Array); //true
+	
+	//只用真正的数组才能用forEach循环方法
+	btns.forEach(function(btn, index){ //btn是对应的按钮（p标签）,index是对应p标签的下标
+		btn.onclick = function(){
+			console.log(index); //直接用index参数即可，这是forEach循环的特点
+		}
+	})
+	
+</script>
+
