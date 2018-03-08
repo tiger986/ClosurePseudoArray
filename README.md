@@ -21,7 +21,8 @@
 for(var i = 0; i <btns.length; i++){
     btns[i].onclick = function(){
         console.log(i);
-	/*Click on each button to print out 9, because this is just a definition of a function that is called when the button is                   clicked, and the cycle is already over: i=9*/
+	/*Click on each button to print out 9, because this is just a definition of a function that is called when the button is
+	clicked, and the cycle is already over: i=9*/
     }
 }
 
@@ -41,7 +42,8 @@ for(var i = 0; i <btns.length; i++){
 	    console.log(num);
 	}
     })(i)
-    /*The function calls itself (called the anonymous function on the outer layer), and the loop is invoked once at a time. (every call       calls I into Num), so printing is the I value that comes out every time.*/
+    /*The function calls itself (called the anonymous function on the outer layer), and the loop is invoked once at a time. (every call
+    calls I into Num), so printing is the I value that comes out every time.*/
 }
 
 //method3
