@@ -1,4 +1,4 @@
-# The use of closures and the transformation of pseudo array into arrays
+## The use of closures and the transformation of pseudo array into arrays
 #### `demand: Click the button to print its corresponding subscript`
 #### HTML code
 ```html
